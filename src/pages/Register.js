@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [mobileNo, setMobileNo] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const notyf = new Notyf();
@@ -17,7 +18,7 @@ export default function Register() {
     fetch('https://movieapp-9vzc.onrender.com/users/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password } )
+      body: JSON.stringify({ email, mobileNo, password } )
     })
     .then(res => res.json())
     .then(data => {
@@ -48,6 +49,10 @@ export default function Register() {
                     <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="auth-input" required />
                   </Form.Group>
                   <Form.Group className="mb-4">
+                    <Form.Label>Mobile Number</Form.Label>
+                    <Form.Control type="number" value={mobileNo} onChange={(e) => setMobileNo(e.target.value)} className="auth-input" required minLength="8" />
+                  </Form.Group>
+                  <Form.Group className="mb-5">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="auth-input" required minLength="8" />
                   </Form.Group>
